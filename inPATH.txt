@@ -1,0 +1,5 @@
+ln -S eclipse
+ln -S spotify-cli # https://gist.github.com/wandernauta/6800547#file-sp
+
+scripts/brightness
+scripts/lock
