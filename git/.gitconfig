@@ -1,0 +1,16 @@
+[user]
+    email = daniil.dotsev@scalefocus.com
+    name = Daniil Dotsev
+[core]
+    editor = vim
+    # GIT repos usually use LF (Unix) line endings.
+    # Linux users should put 'input' below instead of 'true'.
+    autocrlf = true
+
+    # tells git to highlight inappropriate formatting where possible
+    whitespace = trailing-space,tab-in-indent,tabwidth=4
+
+    pager = less -x4
+[credential]
+    helper = cache --timeout=7200
+

@@ -1,5 +1,11 @@
-ln -S eclipse
-ln -S spotify-cli # https://gist.github.com/wandernauta/6800547#file-sp
-
-scripts/brightness
-scripts/lock
+total 24K
+4.0K drwxr-xr-x  2 dotsev dotsev 4.0K Mar 27 13:39 ./
+4.0K drwxr-xr-x 44 dotsev root   4.0K Mar 28 01:41 ../
+4.0K -rwxr-xr-x  1 dotsev dotsev   67 Feb 12 07:05 brightness
+   0 lrwxrwxrwx  1 dotsev dotsev   44 Feb 12 00:56 eclipse -> ../programs/eclipse/jee-neon/eclipse/eclipse
+4.0K -rwxr-xr-x  1 dotsev dotsev   38 Feb 12 07:24 lock
+4.0K -rwxr-xr-x  1 dotsev dotsev   53 Feb 13 01:58 media-next
+   0 lrwxrwxrwx  1 dotsev dotsev   27 Mar 27 13:39 postman -> ../programs/Postman/Postman
+   0 lrwxrwxrwx  1 dotsev dotsev   26 Feb 11 17:18 spotify-cli -> ../packages/spotify-cli/sp
+4.0K -rwxr-xr-x  1 dotsev dotsev  190 Mar 16 12:44 status_bar_job
+   0 lrwxrwxrwx  1 dotsev dotsev   39 Feb 15 13:27 teams -> ../programs/teams-for-linux-0.0.1/teams

@@ -69,20 +69,29 @@
 # End of xbindkeys configuration #
 ##################################
 
-"spotify-cli play ; xdotool key XF86AudioPlay"
-b:9 + Release
+"spotify-cli play; xdotool key XF86AudioPlay"
+b:29 + Release
 
-"spotify-cli next ; xdotool key XF86AudioNext"
-b:8 + Release
+"spotify-cli next; xdotool key XF86AudioNext"
+b:28 + Release
 
 "xdotool key XF86AudioLowerVolume"
-b:6 + Release
+b:26 + Release
 
 "xdotool key XF86AudioRaiseVolume"
-b:7 + Release
+b:27 + Release
 
-"spotify-cli next ; xdotool key XF86AudioNext"
-c:133 + c:82
+"media-next"
+Mod4 + c:82
 
-"spotify-cli prev ; xdotool key XF86AudioPrev"
-c:133 + c:86
+"spotify-cli prev; xdotool key XF86AudioPrev"
+Mod4 + c:86
+
+"spotify-cli prev; xdotool key XF86AudioPrev"
+Control + c:76 + Release
+
+"spotify-cli play; xdotool key XF86AudioPlay"
+Control + c:95 + Release
+
+"media-next"
+Control + c:96 + Release

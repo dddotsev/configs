@@ -1,0 +1,2 @@
+xsetroot -name "$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)% | Used RAM: $(free -m |awk '/Mem/ { print $3 }')M | $(date +"%a %b %d %R")"
+sleep 5s
