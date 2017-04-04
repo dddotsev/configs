@@ -1,2 +1,24 @@
-xsetroot -name "$(cat /sys/class/power_supply/BAT0/status) $(cat /sys/class/power_supply/BAT0/capacity)% | Used RAM: $(free -m |awk '/Mem/ { print $3 }')M | $(date +"%a %b %d %R")"
-sleep 5s
+#!/bin/bash
+
+bat0status="$(cat /sys/class/power_supply/BAT0/status)"
+bat0capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
+
+bat1status="$(cat /sys/class/power_supply/BAT1/status)"
+bat1capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
+
+mute=""
+if [ "$(pactl list sinks | grep '^[[:space:]]Mute:' | awk '{print $2}')" = "yes" ]; then 
+    mute="No "
+fi
+
+volume="$(pactl list sinks | grep '^[[:space:]]Volume:' |     head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')"
+
+backlight="$(light | xargs printf '%.*f\n' 0)"
+
+usedRam="$(free -m |awk '/Mem/ { print $3 }')"
+
+dateTime="$(date +'%a %b %d %H:%M:%S')"
+
+xsetroot -name "[0] ${bat0status} ${bat0capacity}%  [1] ${bat1status} ${bat1capacity}% | ${mute}Volume: ${volume}% | Backlight: ${backlight}%  | Used RAM: ${usedRam}M | ${dateTime}"
+
+sleep 1s

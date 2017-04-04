@@ -1,12 +1,13 @@
-xrandr --output DP-1 --left-of LVDS-1
+xrandr --output eDP-1 --right-of DP-1
+# xrandr --output HDMI-2 --left-of eDP-1
 
 xcompmgr &
 
-feh --bg-scale /home/dotsev/Pictures/wallpaper.jpg
+feh --bg-scale ~/Pictures/wallpaper2.png --bg-scale ~/Pictures/wallpaper1.png
 
-xbindkeys
+# xbindkeys
 
-xautolock -time 5 -locker lock -nowlocker lock -detectsleep &
+xautolock -time 5 -locker slock -nowlocker slock -corners -000 &
 
 while true
 do

@@ -28,9 +28,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Chromium",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Spotify",  NULL,       NULL,       1 << 7,       0,           -1 },
+    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -60,19 +58,30 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "terminator", NULL };
+static const char *termCmd[]  = { "terminator", NULL };
+
 // Custom commands:
-static const char *lockcmd[]  = { "lock", NULL };
-static const char *transsetcmd[] = { "transset-df", "0.9" };
-static const char *transremcmd[] = { "transset-df", "1" };
-static const char *volup[]   = { "amixer", "set", "Master", "3+",     NULL };
-static const char *voldown[] = { "amixer", "set", "Master", "3-",     NULL };
-static const char *voltoggle[] = { "amixer", "set", "Master", "toggle", NULL };
+static const char *lockCmd[]  = { "slock", NULL };
+static const char *transsetCmd[] = { "transset-df", "0.9", NULL };
+static const char *transremCmd[] = { "transset-df", "1", NULL };
+
+// Volume:
+static const char *volumeUpCmd[] = {"pulseaudio-ctl", "up", NULL };
+static const char *volumeDownCmd[] = {"pulseaudio-ctl", "down", NULL };
+static const char *volumeMuteCmd[] = {"pulseaudio-ctl", "mute", NULL };
+static const char *volumeMuteMicCmd[] = {"pulseaudio-ctl", "mute-input", NULL };
+
+// Backlight:
+static const char *backlightUpCmd[] = {"light", "-A", "10", NULL };
+static const char *backlightDownCmd[] = { "light", "-U", "10", NULL };
+
+// Screenshot:
+static const char *screenshotCmd[] = { "screenshot", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY, 		        XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termCmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -104,13 +113,28 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
 	// Custom keybinding:
-	{ WINKEY,                       XK_l,      spawn,          {.v = lockcmd } },
-	{ WINKEY,                       XK_t,      spawn,          {.v = transsetcmd } },
-	{ WINKEY|ShiftMask,             XK_t,      spawn,          {.v = transremcmd } },
-	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,          {.v = volup } },
-    	{ 0,                            XF86XK_AudioLowerVolume,  spawn,          {.v = voldown } },
-    	{ 0,                            XF86XK_AudioMute,         spawn,          {.v = voltoggle } },
+	{ WINKEY,                       XK_l,      spawn,          {.v = lockCmd } },
+	{ WINKEY,                       XK_t,      spawn,          {.v = transsetCmd } },
+	{ WINKEY|ShiftMask,             XK_t,      spawn,          {.v = transremCmd } },
+    
+    // Volume:
+    { 0, XF86XK_AudioRaiseVolume, spawn, {.v = volumeUpCmd } },
+	{ 0, XF86XK_AudioLowerVolume, spawn, {.v = volumeDownCmd } },
+	{ 0, XF86XK_AudioMute, spawn, {.v = volumeMuteCmd } },
+    { 0, XF86XK_AudioMicMute, spawn, {.v = volumeMuteMicCmd} },
+    { MODKEY, XK_Up, spawn, {.v = volumeUpCmd} },
+	{ MODKEY, XK_Down, spawn, {.v = volumeDownCmd} },
+
+    // Backlight:
+    { 0, XF86XK_MonBrightnessUp, spawn, {.v = backlightUpCmd} },
+	{ 0, XF86XK_MonBrightnessDown, spawn, {.v = backlightDownCmd} },
+	{ MODKEY|ShiftMask, XK_Up, spawn, {.v = backlightUpCmd} },
+	{ MODKEY|ShiftMask, XK_Down, spawn, {.v = backlightDownCmd} },
+
+    // Sceenshot:
+    { 0, XK_Print, spawn, {.v = screenshotCmd} },
 };
 
 /* button definitions */
@@ -120,7 +144,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termCmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
