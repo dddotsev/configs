@@ -20,10 +20,12 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/SearchComplete'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'pangloss/vim-javascript'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -289,6 +291,8 @@ map <leader>ba :bufdo bd<cr>
 
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
+
+let g:jedi#documentation_command = "<leader>k"
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
